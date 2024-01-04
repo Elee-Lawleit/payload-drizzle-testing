@@ -7,8 +7,6 @@ dotenv.config({ path: path.resolve(__dirname, "../.env") })
 
 let cached = (global as any).payload
 
-console.log("Cached payload object: ", payload)
-
 if (!cached) {
   cached = (global as any).payload = {
     client: null,
@@ -41,8 +39,6 @@ export const getPayloadClient = async ({ initOptions }: Args = {}) => {
 
   try {
     cached.client = await cached.promise
-    console.log("Resolved cached object: ", cached)
-    console.log("Resolved client: ", cached.client)
   } catch (error) {
     console.log("Payload error: ", error)
     cached.promise = null
@@ -50,6 +46,4 @@ export const getPayloadClient = async ({ initOptions }: Args = {}) => {
 
   //return the client after all the checks
   return cached.client
-
 }
-

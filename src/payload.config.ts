@@ -3,10 +3,15 @@ import {webpackBundler} from "@payloadcms/bundler-webpack"
 import {slateEditor} from "@payloadcms/richtext-slate"
 import {postgresAdapter} from "@payloadcms/db-postgres"
 import path from "path";
+import dotenv from "dotenv"
+import { Products } from "./collections/products";
+import { Media } from "./collections/media";
+
+dotenv.config({path: path.resolve(__dirname, "../.env")})
 
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || "",
-  collections: [],
+  collections: [Products, Media],
   routes: {
     admin: "/sell"
   },

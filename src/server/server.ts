@@ -22,7 +22,6 @@ const createContext = ({
 export type ExpressContext = inferAsyncReturnType<typeof createContext>
 
 const start = async () => {
-
   const payload: Payload = await getPayloadClient({
     initOptions: {
       express: app,
@@ -32,7 +31,8 @@ const start = async () => {
     },
   })
 
-  console.log("Payload object: ", payload)
+  //@ts-ignore
+  console.log("payload mock email: ", (await payload.email).account) //it exists bro
 
   app.use((req, res) => nextHandler(req, res)) //use nextHandler to render templates
 
@@ -48,7 +48,6 @@ const start = async () => {
       )
     })
   })
-
 
   app.use(
     "/api/trpc",
